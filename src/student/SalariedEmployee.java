@@ -106,9 +106,10 @@ public class SalariedEmployee implements IEmployee {
    */
   @Override
   public String toString() {
-    return "Name: " + getName() + "/n"
-            + "ID: " + getID() + "/n"
-            + "Base Salary: $" + getBaseSalary();
+    DecimalFormat df = new DecimalFormat("0.00");
+    return "Name: " + getName() + "\n"
+            + "ID: " + getID() + "\n"
+            + "Base Salary: $" + df.format(getBaseSalary());
   }
 
   /**
@@ -124,7 +125,17 @@ public class SalariedEmployee implements IEmployee {
     return getName().equals(person.name) && getID().equals(person.id);
     }
 
+  /**
+   * hashcode.
+   * @return hash
+   */
+  @Override
+  public int hashCode() {
+    return Objects.hash(name, id);
+  }
 
 }
+
+
 
 

@@ -31,19 +31,28 @@ public class IEmployeeTest {
       IEmployee er = new SalariedEmployee("Google", "1111", 953000);
       er.giveRaiseByPercent(-5);
     });
-
   }
+
+  @Test
+  public void testSpecialHoursTime() {
+    Assertions.assertThrows(IllegalArgumentException.class, () -> {
+    HourlyEmployee e = new HourlyEmployee("Apple", "1234", 48, 30);
+    e.setSpecialHours(90);
+    });
+  }
+
+
   @Test
   public void testGetHappyDayEmployee() {
     lucy.giveRaiseByPercent(5.0);
-    assertEquals(73500.00, lucy.getBaseSalary(),0);
+    assertEquals(73500.00, lucy.getBaseSalary());
     assertEquals("Lucy", lucy.getName());
     assertEquals("222-22-2222",lucy.getID());
     SalariedEmployee lucy2 = new SalariedEmployee(lucy);
     assertEquals(true, lucy.equals(lucy2));
 
     snoopyHours.giveRaiseByPercent(5.0);
-    assertEquals(18.38, snoopyHours.getBaseSalary(),0);
+    assertEquals(18.38, snoopyHours.getBaseSalary());
     assertEquals("Snoopy", snoopyHours.getName());
     assertEquals("111-CHLY-BRWN", snoopyHours.getID());
     HourlyEmployee snoopyHours2 = new HourlyEmployee(snoopyHours);
@@ -93,6 +102,12 @@ public class IEmployeeTest {
     IEmployee er = new SalariedEmployee("Google", "1111", 953000);
     er.giveRaiseByPercent(5);
     assertEquals(953000.0, er.getBaseSalary());
+  }
+
+  @Test
+  public void testToString() {
+    assertEquals("Name: Snoopy\nID: 111-CHLY-BRWN\nBase Salary: $17.50", snoopyHours.toString());
+    assertEquals("Name: Lucy\nID: 222-22-2222\nBase Salary: $70000.00", lucy.toString());
   }
 
 
